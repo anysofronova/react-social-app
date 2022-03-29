@@ -1,0 +1,31 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;900&display=swap");
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.main {
+  margin: 0rem 3rem;
+  &__wrapper {
+    display: grid;
+    grid-template-columns: 2fr 10fr;
+    grid-template-rows: 60px 1fr;
+    grid-template-areas:
+      "header header "
+      "navbar profile ";
+  }
+  &__header {
+    grid-area: header;
+    background-color: aqua;
+  }
+  &__navbar {
+    grid-area: navbar;
+    background-color: bisque;
+  }
+  &__profile {
+    grid-area: profile;
+    background-color: rgb(157, 219, 129);
+  }
+}
