@@ -1,0 +1,16 @@
+.navbar {
+  &__wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  &__list {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  &__item {
+    margin: 1rem 0;
+  }
+}
