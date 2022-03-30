@@ -1,0 +1,13 @@
+@use "../../../scss/" as *;
+
+.dialogs__item {
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding: 1rem 2rem;
+  &:hover {
+    background-color: $ligthGrey;
+    transition: all 0.2s ease-in;
+  }
+}
