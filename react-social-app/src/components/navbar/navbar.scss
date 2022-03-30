@@ -1,4 +1,6 @@
+@use "../../scss/" as *;
 .navbar {
+  color: $white;
   &__wrapper {
     display: flex;
     justify-content: center;
