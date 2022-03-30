@@ -1,29 +1,22 @@
 import React from "react";
 import "./dialogs.scss";
-import { Link } from "react-router-dom";
+import DialogItem from "./dialogItem/DialogItem";
+import MessageItem from "./messageItem/MessageItem";
 
 function Dialogs() {
   return (
     <div className="dialogs">
       <div className="dialogs__wrapper">
         <div className="dialogs__list">
-          <div className="dialogs__item">
-            <Link to="/dialogs/1">Anna</Link>
-          </div>
-          <div className="dialogs__item">
-            <Link to="/dialogs/2">Vlad</Link>
-          </div>
-          <div className="dialogs__item">
-            <Link to="/dialogs/3">Misha</Link>
-          </div>
-          <div className="dialogs__item">
-            <Link to="/dialogs/4">Sergey</Link>
-          </div>
+          <DialogItem name="Anna" id="1" />
+          <DialogItem name="Vlad" id="2" />
+          <DialogItem name="Misha" id="3" />
+          <DialogItem name="Sergey" id="4" />
         </div>
         <div className="dialogs__messages">
-          <div className="dialogs__message">Hi</div>
-          <div className="dialogs__message">How are you?</div>
-          <div className="dialogs__message">What's up?</div>
+          <MessageItem text="Hi" />
+          <MessageItem text="How are you?" />
+          <MessageItem text="What's up?" />
         </div>
       </div>
     </div>

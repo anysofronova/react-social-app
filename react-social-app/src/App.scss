@@ -6,11 +6,11 @@
   margin: 0;
   box-sizing: border-box;
   -webkit-tap-highlight-color: transparent;
+  font-family: "Montserrat", sans-serif;
 }
 
 .main {
   &__wrapper {
-    font-family: "Montserrat", sans-serif;
     display: grid;
     grid-template-columns: 2fr 10fr;
     grid-template-rows: 10vh 90vh;
@@ -35,7 +35,8 @@ a {
   color: unset;
 }
 button,
-input {
+input,
+textarea {
   outline: 0;
 }
 

@@ -4,13 +4,13 @@ import Post from "./Post/Post";
 
 function MyPosts() {
   return (
-    <div className="myPost">
-      <div className="myPost__wrapper">
-        <div>
-          <textarea></textarea>
-          <button></button>
+    <div className="myPosts">
+      <div className="myPosts__wrapper">
+        <div className="myPosts__add">
+          <textarea className="myPosts__textarea"></textarea>
+          <button>Add a new post</button>
         </div>
-        <div className="myPost__posts">
+        <div className="myPosts__posts">
           <Post message="Hi, how are you?" likesCount="4" />
           <Post message="It's my first post" likesCount="0" />
         </div>
