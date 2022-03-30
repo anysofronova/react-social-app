@@ -1,0 +1,22 @@
+.profileInfo {
+  .profile__bgimg {
+    background-image: url("https://cdn.pixabay.com/photo/2017/08/10/00/07/nature-2616302_1280.jpg");
+    width: 100%;
+    height: 100px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 0px -300px;
+    margin-bottom: 2rem;
+  }
+  .profile__desc {
+    display: flex;
+    padding: 2rem;
+    justify-content: space-around;
+    align-items: center;
+    img {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+    }
+  }
+}

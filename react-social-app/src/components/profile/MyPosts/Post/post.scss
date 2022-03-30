@@ -1,0 +1,11 @@
+@use "../../../../scss/" as *;
+
+.post {
+  display: flex;
+  background-color: $ligthGrey;
+  padding: 1rem 2rem;
+  margin-bottom: 1rem;
+  border-radius: 5px;
+  justify-content: space-between;
+  align-items: center;
+}

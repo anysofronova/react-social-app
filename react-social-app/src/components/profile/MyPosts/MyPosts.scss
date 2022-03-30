@@ -1,0 +1,36 @@
+@use "../../../scss/" as *;
+
+.myPosts {
+  .myPosts__wrapper {
+    padding: 2rem;
+    .myPosts__add {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-end;
+      .myPosts__textarea {
+        width: 100%;
+        resize: none;
+        height: 10vh;
+        padding: 1rem;
+        margin-bottom: 1rem;
+      }
+      button {
+        padding: 0.5rem 1rem;
+        background-color: $white;
+        border: 1px solid $dark;
+        width: 30%;
+        cursor: pointer;
+        &:hover {
+          background-color: $medium;
+          color: $white;
+          transition: all 0.15s ease-in;
+        }
+      }
+    }
+    .myPosts__posts {
+      width: 100%;
+      margin-top: 2rem;
+    }
+  }
+}
