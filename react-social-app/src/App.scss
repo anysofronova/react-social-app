@@ -32,6 +32,9 @@
 a {
   text-decoration: none;
   color: unset;
+  &.active {
+    color: #fff;
+  }
 }
 button,
 input {
