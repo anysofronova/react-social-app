@@ -8,7 +8,10 @@ function Profile(props) {
     <div className="profile">
       <div className="profile__wrapper">
         <ProfileInfo />
-        <MyPosts postsData={props.profilePage.postsData} />
+        <MyPosts
+          postsData={props.profilePage.postsData}
+          addPost={props.addPost}
+        />
       </div>
     </div>
   );

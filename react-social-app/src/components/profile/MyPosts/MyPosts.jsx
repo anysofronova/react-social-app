@@ -1,14 +1,21 @@
-import React from "react";
+import React, { createRef } from "react";
 import "./MyPosts.scss";
 import Post from "./Post/Post";
 
-function MyPosts(props) {
+const MyPosts = (props) => {
+  const newPostEl = createRef();
+  const addNewPost = () => {
+    const text = newPostEl.current.value;
+    props.addPost(text);
+    newPostEl.current.value = "";
+  };
+
   return (
     <div className="myPosts">
       <div className="myPosts__wrapper">
         <div className="myPosts__add">
-          <textarea className="myPosts__textarea"></textarea>
-          <button>Add a new post</button>
+          <textarea className="myPosts__textarea" ref={newPostEl}></textarea>
+          <button onClick={addNewPost}>Add a new post</button>
         </div>
         <div className="myPosts__posts">
           {props.postsData.map((i) => (
@@ -18,6 +25,6 @@ function MyPosts(props) {
       </div>
     </div>
   );
-}
+};
 
 export default MyPosts;
