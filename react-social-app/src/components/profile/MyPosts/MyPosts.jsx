@@ -1,9 +1,8 @@
 import React from "react";
 import "./MyPosts.scss";
 import Post from "./Post/Post";
-import postsData from "../../../data/postsData";
 
-function MyPosts() {
+function MyPosts(props) {
   return (
     <div className="myPosts">
       <div className="myPosts__wrapper">
@@ -12,7 +11,7 @@ function MyPosts() {
           <button>Add a new post</button>
         </div>
         <div className="myPosts__posts">
-          {postsData.map((i) => (
+          {props.postsData.map((i) => (
             <Post message={i.post} key={i.id} likesCount={i.likesCount} />
           ))}
         </div>

@@ -27,6 +27,7 @@
   }
   &__profile {
     grid-area: profile;
+    overflow-y: scroll;
   }
 }
 
