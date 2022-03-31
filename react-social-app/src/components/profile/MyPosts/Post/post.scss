@@ -2,10 +2,16 @@
 
 .post {
   display: flex;
+  justify-content: space-between;
+  // grid-template-columns: 8fr 1fr;
+  gap: 0.5rem;
   background-color: $ligthGrey;
-  padding: 1rem 2rem;
+  padding: 1rem 1rem;
   margin-bottom: 1rem;
   border-radius: 5px;
   justify-content: space-between;
   align-items: center;
+  .post__likes {
+    white-space: nowrap;
+  }
 }
