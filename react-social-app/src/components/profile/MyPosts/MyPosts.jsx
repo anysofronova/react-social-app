@@ -1,6 +1,7 @@
 import React from "react";
 import "./MyPosts.scss";
 import Post from "./Post/Post";
+import postsData from "../../../data/postsData";
 
 function MyPosts() {
   return (
@@ -11,8 +12,9 @@ function MyPosts() {
           <button>Add a new post</button>
         </div>
         <div className="myPosts__posts">
-          <Post message="Hi, how are you?" likesCount="4" />
-          <Post message="It's my first post" likesCount="0" />
+          {postsData.map((i) => (
+            <Post message={i.post} key={i.id} likesCount={i.likesCount} />
+          ))}
         </div>
       </div>
     </div>
