@@ -11,6 +11,8 @@ function Profile(props) {
         <MyPosts
           postsData={props.profilePage.postsData}
           addPost={props.addPost}
+          newPostText={props.profilePage.newPostText}
+          changeNewPostText={props.changeNewPostText}
         />
       </div>
     </div>

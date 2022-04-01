@@ -4,18 +4,22 @@ import Post from "./Post/Post";
 
 const MyPosts = (props) => {
   const newPostEl = createRef();
-  const addNewPost = () => {
+  const onPostChange = () => {
     const text = newPostEl.current.value;
-    props.addPost(text);
-    newPostEl.current.value = "";
+    props.changeNewPostText(text);
   };
 
   return (
     <div className="myPosts">
       <div className="myPosts__wrapper">
         <div className="myPosts__add">
-          <textarea className="myPosts__textarea" ref={newPostEl}></textarea>
-          <button onClick={addNewPost}>Add a new post</button>
+          <textarea
+            onChange={onPostChange}
+            className="myPosts__textarea"
+            ref={newPostEl}
+            value={props.newPostText}
+          />
+          <button onClick={() => props.addPost()}>Add a new post</button>
         </div>
         <div className="myPosts__posts">
           {props.postsData.map((i) => (
