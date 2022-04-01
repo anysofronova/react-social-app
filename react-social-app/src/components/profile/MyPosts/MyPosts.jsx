@@ -5,8 +5,8 @@ import Post from "./Post/Post";
 const MyPosts = (props) => {
   const newPostEl = createRef();
   const onPostChange = () => {
-    const text = newPostEl.current.value;
-    props.changeNewPostText(text);
+    const newText = newPostEl.current.value;
+    props.dispatch({ type: "CHANGE_NEW_POST_TEXT", newText });
   };
 
   return (
@@ -19,7 +19,9 @@ const MyPosts = (props) => {
             ref={newPostEl}
             value={props.newPostText}
           />
-          <button onClick={() => props.addPost()}>Add a new post</button>
+          <button onClick={() => props.dispatch({ type: "ADD_POST" })}>
+            Add a new post
+          </button>
         </div>
         <div className="myPosts__posts">
           {props.postsData.map((i) => (
