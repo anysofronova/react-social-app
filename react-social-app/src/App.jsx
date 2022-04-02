@@ -29,7 +29,12 @@ function App(props) {
               />
               <Route
                 path="/dialogs/*"
-                element={<Dialogs messagesPage={props.state.messagesPage} />}
+                element={
+                  <Dialogs
+                    messagesPage={props.state.messagesPage}
+                    dispatch={props.dispatch}
+                  />
+                }
               />
             </Routes>
           </div>

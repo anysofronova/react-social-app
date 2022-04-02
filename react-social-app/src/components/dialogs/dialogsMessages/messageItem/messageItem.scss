@@ -1,7 +1,7 @@
-@use "../../../scss/" as *;
+@use "../../../../scss/" as *;
 
 .message {
-  padding: 1rem 2rem;
+  padding: 0.4rem 2rem;
   .message__item {
     padding: 1rem;
     border: 1px solid $ligthGrey;
