@@ -1,16 +1,14 @@
-import React, { createRef } from "react";
+import React from "react";
 import MessageItem from "./messageItem/MessageItem";
 import "./dialogsMessages.scss";
 import {
   addMessageActionCreator,
   changeNewMessageTextActionCreator,
-} from "../../../redux/state";
+} from "../../../redux/dialogsReducer";
 
 const DialogsMessages = (props) => {
-  const newMessageEl = createRef();
-  const onMessageChange = () => {
-    const newMessage = newMessageEl.current.value;
-    let action = changeNewMessageTextActionCreator(newMessage);
+  const onMessageChange = (e) => {
+    let action = changeNewMessageTextActionCreator(e.target.value);
     props.dispatch(action);
   };
   return (
@@ -22,7 +20,6 @@ const DialogsMessages = (props) => {
         <textarea
           onChange={onMessageChange}
           className="dialogs____textarea"
-          ref={newMessageEl}
           value={props.messagesPage.newMessageText}
         />
 
