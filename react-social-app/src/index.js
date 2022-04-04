@@ -3,15 +3,14 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
+import { BrowserRouter as Router } from "react-router-dom";
+import { Provider } from "react-redux";
 
-export let renderEntireTree = (state) => {
-  ReactDOM.render(
-    <App state={state} dispatch={store.dispatch.bind(store)} store={store} />,
-    document.getElementById("root")
-  );
-};
-
-renderEntireTree(store.getState());
-store.subscribe(() => {
-  renderEntireTree(store.getState());
-});
+ReactDOM.render(
+  <Router>
+    <Provider store={store}>
+      <App store={store} />
+    </Provider>
+  </Router>,
+  document.getElementById("root")
+);

@@ -2,7 +2,7 @@ import React from "react";
 import "./MyPosts.scss";
 import Post from "./Post/Post";
 
-const MyPosts = ({ changeNewPostText, addPost, profileReducer }) => {
+const MyPosts = ({ changeNewPostText, addPost, newPostText, postsData }) => {
   const onChangeNewPostText = (e) => changeNewPostText(e.target.value);
   const onAddPost = () => addPost();
 
@@ -13,12 +13,12 @@ const MyPosts = ({ changeNewPostText, addPost, profileReducer }) => {
           <textarea
             onChange={onChangeNewPostText}
             className="myPosts__textarea"
-            value={profileReducer.newPostText}
+            value={newPostText}
           />
           <button onClick={onAddPost}>Add a new post</button>
         </div>
         <div className="myPosts__posts">
-          {profileReducer.postsData.map((i) => (
+          {postsData.map((i) => (
             <Post message={i.post} key={i.id} likesCount={i.likesCount} />
           ))}
         </div>
