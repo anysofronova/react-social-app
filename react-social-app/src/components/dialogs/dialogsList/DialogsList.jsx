@@ -2,10 +2,10 @@ import React from "react";
 import DialogItem from "./dialogItem/DialogItem";
 import "./dialogsList.scss";
 
-const DialogsList = (props) => {
+const DialogsList = ({ dialogsData }) => {
   return (
     <div className="dialogs__list">
-      {props.dialogsData.map((i) => (
+      {dialogsData.map((i) => (
         <DialogItem name={i.name} id={i.id} key={i.id} />
       ))}
     </div>

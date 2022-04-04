@@ -3,11 +3,11 @@ import Header from "./components/header/Header";
 import Navbar from "./components/navbar/Navbar";
 import Profile from "./components/profile/Profile";
 import Dialogs from "./components/dialogs/Dialogs";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-function App(props) {
+function App({ state, dispatch, store }) {
   return (
-    <BrowserRouter>
+    <Router>
       <div className="main">
         <div className="main__wrapper">
           <div className="main__header">
@@ -18,29 +18,13 @@ function App(props) {
           </div>
           <div className="main__profile">
             <Routes>
-              <Route
-                path="/"
-                element={
-                  <Profile
-                    profilePage={props.state.profilePage}
-                    dispatch={props.dispatch}
-                  />
-                }
-              />
-              <Route
-                path="/dialogs/*"
-                element={
-                  <Dialogs
-                    messagesPage={props.state.messagesPage}
-                    dispatch={props.dispatch}
-                  />
-                }
-              />
+              <Route path="/" element={<Profile store={store} />} />
+              <Route path="/dialogs/*" element={<Dialogs store={store} />} />
             </Routes>
           </div>
         </div>
       </div>
-    </BrowserRouter>
+    </Router>
   );
 }
 
