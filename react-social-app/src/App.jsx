@@ -3,44 +3,26 @@ import Header from "./components/header/Header";
 import Navbar from "./components/navbar/Navbar";
 import Profile from "./components/profile/Profile";
 import Dialogs from "./components/dialogs/Dialogs";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 
-function App(props) {
+function App({ store }) {
   return (
-    <BrowserRouter>
-      <div className="main">
-        <div className="main__wrapper">
-          <div className="main__header">
-            <Header />
-          </div>
-          <div className="main__navbar">
-            <Navbar />
-          </div>
-          <div className="main__profile">
-            <Routes>
-              <Route
-                path="/"
-                element={
-                  <Profile
-                    profilePage={props.state.profilePage}
-                    dispatch={props.dispatch}
-                  />
-                }
-              />
-              <Route
-                path="/dialogs/*"
-                element={
-                  <Dialogs
-                    messagesPage={props.state.messagesPage}
-                    dispatch={props.dispatch}
-                  />
-                }
-              />
-            </Routes>
-          </div>
+    <div className="main">
+      <div className="main__wrapper">
+        <div className="main__header">
+          <Header />
+        </div>
+        <div className="main__navbar">
+          <Navbar />
+        </div>
+        <div className="main__profile">
+          <Routes>
+            <Route path="/" element={<Profile/>} />
+            <Route path="/dialogs/*" element={<Dialogs dialogsData={store.getState().dialogsReducer.dialogsData} />} />
+          </Routes>
         </div>
       </div>
-    </BrowserRouter>
+    </div>
   );
 }
 

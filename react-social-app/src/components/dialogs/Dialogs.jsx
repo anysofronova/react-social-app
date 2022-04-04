@@ -1,21 +1,17 @@
 import React from "react";
 import "./dialogs.scss";
 import DialogsList from "./dialogsList/DialogsList";
-import DialogsMessages from "./dialogsMessages/DialogsMessages";
+import DialogsMessagesContainer from "./dialogsMessages/DialogsMessagesContainer";
 
-function Dialogs(props) {
+function Dialogs({ dialogsData }) {
   return (
     <div className="dialogs">
       <div className="dialogs__wrapper">
         <DialogsList
           className="dialogs__list"
-          dialogsData={props.messagesPage.dialogsData}
+          dialogsData={dialogsData}
         />
-        <DialogsMessages
-          className="dialogs__messages"
-          messagesPage={props.messagesPage}
-          dispatch={props.dispatch}
-        />
+        <DialogsMessagesContainer />
       </div>
     </div>
   );
