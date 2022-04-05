@@ -1,0 +1,51 @@
+@use '../../../scss/variables' as *;
+
+.userItem{
+    width: 80%;
+    padding: .4rem 2rem;
+    display: grid;
+    grid-template-columns: 80px auto;
+    grid-gap: 1rem;
+
+    .userItem__main{
+        button{
+            font-size:1vw;
+            width: 100%;
+            border: 1px solid $ligthGrey;
+            padding: .2rem .5rem;
+            border-radius: 3px;
+            cursor: pointer;
+            &:hover{
+                background-color: $ligthGrey;
+            }
+        }
+    }
+
+    .userItem__info{
+        padding: 1rem;
+        border-radius: 10px;
+        border: 1px solid $ligthGrey;
+        display: grid;
+        grid-template-columns: 3fr 1fr;
+
+        .userItem__nameAndStatus{
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            .userItem__info_name{
+                margin-bottom: 1rem;
+                font-weight: 500;
+            }
+        }
+
+        .userItem__info_country{
+            display: flex;
+            flex-direction: column;
+            text-align: end;
+
+            span{
+                margin-bottom: .5rem;
+            }
+        }
+    }
+}

@@ -15,6 +15,9 @@ function Navbar() {
           </li>
           <li className="navbar__item">News</li>
           <li className="navbar__item">Music</li>
+          <li className="navbar__item">
+            <NavLink to="/users"> Find Users</NavLink>
+          </li>
           <li className="navbar__item">Settings</li>
         </ul>
       </div>

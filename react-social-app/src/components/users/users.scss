@@ -1,0 +1,21 @@
+@use '../../scss/variables' as *;
+
+.users{
+  padding: 2rem 3rem;
+
+  .users__wrapper{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .users__btn{
+      width: 30%;
+      margin-top: 1rem;
+      padding: .4rem;
+      cursor: pointer;
+      border: 1px solid $ligthGrey;
+      &:hover{
+        background-color: $ligthGrey;
+      }
+    }
+  }
+}
