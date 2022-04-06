@@ -19,18 +19,6 @@ const Users = ({
   return (
     <div className="users">
       <div className="users__wrapper">
-        <div className="users_buttons">
-          {pages.map((i) => (
-            <button
-              onClick={() => onchangeCurrentPage(i)}
-              key={i}
-              className={currentPage === i ? "selectedPage" : ""}
-            >
-              {i}
-            </button>
-          ))}
-        </div>
-
         {users.map((i) => (
           <UserItem
             id={i.id}
@@ -42,6 +30,17 @@ const Users = ({
             toggleFollow={toggleFollow}
           />
         ))}
+        <div className="users_buttons">
+          {pages.map((i) => (
+            <button
+              onClick={() => onchangeCurrentPage(i)}
+              key={i}
+              className={currentPage === i ? "selectedPage" : ""}
+            >
+              {i}
+            </button>
+          ))}
+        </div>
       </div>
     </div>
   );
