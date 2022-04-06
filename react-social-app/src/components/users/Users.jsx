@@ -1,25 +1,35 @@
 import React from "react";
-import UserItem from "./userItem/UserItem";
 import "./users.scss";
-import axios from "axios";
+import UserItem from "./userItem/UserItem";
 
-const Users = ({ users, toggleFollow, setUsers }) => {
-  const onSetUsers = () => {
-    if (users.length < 6) {
-      axios
-        .get("https://social-network.samuraijs.com/api/1.0/users")
-        .then((r) => setUsers([...r.data.items]));
-    }
-  };
-
+const Users = ({
+  users,
+  toggleFollow,
+  totalUsersCount,
+  pageSize,
+  currentPage,
+  onchangeCurrentPage,
+}) => {
+  let pagesCount = Math.ceil(totalUsersCount / pageSize);
+  let pages = [];
+  for (let i = 1; i <= pagesCount; i++) {
+    pages.push(i);
+    if (i === 20) break;
+  }
   return (
     <div className="users">
       <div className="users__wrapper">
-        {users.length < 6 ? (
-          <button className="users__btn" onClick={onSetUsers}>
-            Get users
-          </button>
-        ) : null}
+        <div className="users_buttons">
+          {pages.map((i) => (
+            <button
+              onClick={() => onchangeCurrentPage(i)}
+              key={i}
+              className={currentPage === i ? "selectedPage" : ""}
+            >
+              {i}
+            </button>
+          ))}
+        </div>
 
         {users.map((i) => (
           <UserItem
@@ -27,15 +37,11 @@ const Users = ({ users, toggleFollow, setUsers }) => {
             key={i.id}
             photos={i.photos}
             name={i.name}
-            location={i.location ? i.location : null}
             status={i.status}
             followed={i.followed}
             toggleFollow={toggleFollow}
           />
         ))}
-        {users.length >= 6 ? (
-          <button className="users__btn">Show more</button>
-        ) : null}
       </div>
     </div>
   );
