@@ -8,7 +8,7 @@ function Navbar() {
       <div className="navbar__wrapper">
         <ul className="navbar__list">
           <li className="navbar__item">
-            <NavLink to="/profile">Profile</NavLink>
+            <NavLink to="/">Profile</NavLink>
           </li>
           <li className="navbar__item">
             <NavLink to="/dialogs">Messages</NavLink>

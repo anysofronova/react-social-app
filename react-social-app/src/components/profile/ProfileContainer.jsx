@@ -21,7 +21,7 @@ class ProfileContainer extends Component {
   componentDidMount() {
     this.props.toggleIsFetching(true);
     let userId = this.props.router.params.userId;
-    if (!userId) userId = 2;
+    if (!userId) userId = 23291;
     axios
       .get(`https://social-network.samuraijs.com/api/1.0/profile/${userId}`)
       .then((r) => {
