@@ -1,0 +1,37 @@
+@use "../../../scss/variables" as *;
+
+.userItem {
+  font-size: 13px;
+  width: 80%;
+  padding: 0.4rem 2rem;
+  display: grid;
+  grid-template-columns: 80px auto;
+  grid-gap: 1rem;
+
+  .userItem__main {
+    button {
+      font-size: 1vw;
+      width: 100%;
+      border: 1px solid $ligthGrey;
+      padding: 0.2rem 0.5rem;
+      border-radius: 3px;
+      cursor: pointer;
+      &:hover {
+        background-color: $ligthGrey;
+      }
+    }
+  }
+
+  .userItem__info {
+    padding: 1rem;
+    border-radius: 10px;
+    border: 1px solid $ligthGrey;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    .userItem__info_name {
+      margin-bottom: 1rem;
+      font-weight: 500;
+    }
+  }
+}

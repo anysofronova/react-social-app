@@ -3,11 +3,11 @@ import "./profile.scss";
 import ProfileInfo from "./profileInfo/ProfileInfo";
 import MyPostsContainer from "./MyPosts/MyPostsContainer";
 
-function Profile() {
+function Profile({ profile }) {
   return (
     <div className="profile">
       <div className="profile__wrapper">
-        <ProfileInfo />
+        <ProfileInfo profile={profile} />
         <MyPostsContainer />
       </div>
     </div>

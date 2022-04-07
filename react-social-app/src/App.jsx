@@ -4,6 +4,8 @@ import Navbar from "./components/navbar/Navbar";
 import Profile from "./components/profile/Profile";
 import Dialogs from "./components/dialogs/Dialogs";
 import { Routes, Route } from "react-router-dom";
+import UsersContainer from "./components/users/UsersContainer";
+import ProfileContainer from "./components/profile/ProfileContainer";
 
 function App({ store }) {
   return (
@@ -17,8 +19,18 @@ function App({ store }) {
         </div>
         <div className="main__profile">
           <Routes>
-            <Route path="/" element={<Profile/>} />
-            <Route path="/dialogs/*" element={<Dialogs dialogsData={store.getState().dialogsReducer.dialogsData} />} />
+            <Route path="/profile/:userId" element={<ProfileContainer />} />
+            <Route path="/profile" element={<ProfileContainer />} />
+            <Route path="/users" element={<UsersContainer />} />
+            <Route
+              path="/dialogs/*"
+              element={
+                <Dialogs
+                  dialogsData={store.getState().dialogsReducer.dialogsData}
+                />
+              }
+            />
+            <Route path="/" element={<Profile />} />
           </Routes>
         </div>
       </div>
