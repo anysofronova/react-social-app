@@ -19,7 +19,8 @@ function App({ store }) {
         </div>
         <div className="main__profile">
           <Routes>
-            <Route path="/profile/*" element={<ProfileContainer />} />
+            <Route path="/profile/:userId" element={<ProfileContainer />} />
+            <Route path="/profile" element={<ProfileContainer />} />
             <Route path="/users" element={<UsersContainer />} />
             <Route
               path="/dialogs/*"
