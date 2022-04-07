@@ -5,6 +5,7 @@ import Profile from "./components/profile/Profile";
 import Dialogs from "./components/dialogs/Dialogs";
 import { Routes, Route } from "react-router-dom";
 import UsersContainer from "./components/users/UsersContainer";
+import ProfileContainer from "./components/profile/ProfileContainer";
 
 function App({ store }) {
   return (
@@ -18,7 +19,7 @@ function App({ store }) {
         </div>
         <div className="main__profile">
           <Routes>
-            <Route path="/" element={<Profile />} />
+            <Route path="/profile/*" element={<ProfileContainer />} />
             <Route path="/users" element={<UsersContainer />} />
             <Route
               path="/dialogs/*"
@@ -28,6 +29,7 @@ function App({ store }) {
                 />
               }
             />
+            <Route path="/" element={<Profile />} />
           </Routes>
         </div>
       </div>
