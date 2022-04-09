@@ -17,10 +17,10 @@ export const userAPI = {
   getProfile(userId) {
     return instance.get(`profile/${userId}`).then((r) => r.data);
   },
-  getFollow(userId) {
-    return instance.post(`follow/${userId}`).then((r) => r.data.resultCode);
+  follow(userId) {
+    return instance.post(`follow/${userId}`);
   },
-  getUnFollow(userId) {
-    return instance.delete(`follow/${userId}`).then((r) => r.data.resultCode);
+  unFollow(userId) {
+    return instance.delete(`follow/${userId}`);
   },
 };

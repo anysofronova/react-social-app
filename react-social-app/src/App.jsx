@@ -1,17 +1,17 @@
 import "./App.scss";
-import Header from "./components/header/Header";
 import Navbar from "./components/navbar/Navbar";
 import Dialogs from "./components/dialogs/Dialogs";
 import { Routes, Route } from "react-router-dom";
 import UsersContainer from "./components/users/UsersContainer";
 import ProfileContainer from "./components/profile/ProfileContainer";
+import HeaderContainer from "./components/header/HeaderContainer";
 
 function App({ store }) {
   return (
     <div className="main">
       <div className="main__wrapper">
         <div className="main__header">
-          <Header />
+          <HeaderContainer />
         </div>
         <div className="main__navbar">
           <Navbar />

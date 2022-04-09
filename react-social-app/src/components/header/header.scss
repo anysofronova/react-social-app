@@ -9,4 +9,8 @@
   font-size: 24px;
   background-color: $dark;
   color: $white;
+  justify-content: space-between;
+  .header__login {
+    font-size: 16px;
+  }
 }
