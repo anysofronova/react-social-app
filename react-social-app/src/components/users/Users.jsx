@@ -9,6 +9,8 @@ const Users = ({
   pageSize,
   currentPage,
   onchangeCurrentPage,
+  followingInProgress,
+  toggleFollowingProgress,
 }) => {
   let pagesCount = Math.ceil(totalUsersCount / pageSize);
   let pages = [];
@@ -28,6 +30,8 @@ const Users = ({
             status={i.status}
             followed={i.followed}
             toggleFollow={toggleFollow}
+            followingInProgress={followingInProgress}
+            toggleFollowingProgress={toggleFollowingProgress}
           />
         ))}
         <div className="users_buttons">
