@@ -2,7 +2,6 @@ import React from "react";
 import "./userItem.scss";
 import defaultUserPhoto from "../../../assets/img/defaultUserPhoto.png";
 import { NavLink } from "react-router-dom";
-import { userAPI } from "../../../api/api";
 
 const UserItem = ({
   id,
@@ -10,30 +9,24 @@ const UserItem = ({
   photos,
   status,
   followed,
-  toggleFollow,
   followingInProgress,
-  toggleFollowingProgress,
+  getFollow,
+  getUnFollow,
 }) => {
-  const onfollowingInProgress = () => {
-    toggleFollowingProgress(true, id);
-    if (followed) {
-      if (userAPI.getUnFollow(id)) toggleFollow(id);
-    } else {
-      if (userAPI.getFollow(id)) toggleFollow(id);
-    }
-    toggleFollowingProgress(false, id);
-  };
-
+  const isDisabled = () => followingInProgress.some((idUser) => idUser === id);
   return (
     <div className="userItem">
       <div className="userItem__main">
         <img src={photos.small || defaultUserPhoto} alt="user" />
-        <button
-          onClick={onfollowingInProgress}
-          disabled={followingInProgress.some((idUser) => idUser === id)}
-        >
-          {followed ? "Unfollow" : "Follow"}
-        </button>
+        {followed ? (
+          <button disabled={isDisabled()} onClick={() => getUnFollow(id)}>
+            Unfollow
+          </button>
+        ) : (
+          <button disabled={isDisabled()} onClick={() => getFollow(id)}>
+            Follow
+          </button>
+        )}
       </div>
       <div className="userItem__info">
         <div className="userItem__info_name">

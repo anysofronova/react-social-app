@@ -4,13 +4,13 @@ import UserItem from "./userItem/UserItem";
 
 const Users = ({
   users,
-  toggleFollow,
   totalUsersCount,
   pageSize,
   currentPage,
   onchangeCurrentPage,
   followingInProgress,
-  toggleFollowingProgress,
+  getFollow,
+  getUnFollow,
 }) => {
   let pagesCount = Math.ceil(totalUsersCount / pageSize);
   let pages = [];
@@ -29,9 +29,9 @@ const Users = ({
             name={i.name}
             status={i.status}
             followed={i.followed}
-            toggleFollow={toggleFollow}
             followingInProgress={followingInProgress}
-            toggleFollowingProgress={toggleFollowingProgress}
+            getFollow={getFollow}
+            getUnFollow={getUnFollow}
           />
         ))}
         <div className="users_buttons">
