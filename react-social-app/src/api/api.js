@@ -14,16 +14,28 @@ export const userAPI = {
       .get(`users?page=${currentPage}&count=${pageSize}`)
       .then((r) => r.data);
   },
-  getProfile(userId) {
-    return instance.get(`profile/${userId}`).then((r) => r.data);
-  },
   follow(userId) {
     return instance.post(`follow/${userId}`);
   },
   unFollow(userId) {
     return instance.delete(`follow/${userId}`);
   },
-  auth() {
+};
+
+export const authAPI = {
+  me() {
     return instance.get(`auth/me`);
+  },
+};
+
+export const profileAPI = {
+  getProfile(userId) {
+    return instance.get(`profile/${userId}`).then((r) => r.data);
+  },
+  getStatus(userId) {
+    return instance.get(`profile/status/${userId}`).then((r) => r.data);
+  },
+  updateStatus(status) {
+    return instance.put(`profile/status`, { status });
   },
 };

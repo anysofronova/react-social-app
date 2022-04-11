@@ -2,11 +2,10 @@ import React from "react";
 import "./profileInfo.scss";
 import defaultUserPhoto from "../../../assets/img/defaultUserPhoto.png";
 import PreLoader from "../../UI/PreLoader";
+import ProfileStatus from "./ProfileStatus";
 
-function ProfileInfo({ profile }) {
-  if (!profile) {
-    return <PreLoader />;
-  }
+function ProfileInfo({ profile, status, updateUserStatus }) {
+  if (!profile) return <PreLoader />;
   return (
     <div className="profileInfo">
       <div className="profile__bgimg"></div>
@@ -20,7 +19,9 @@ function ProfileInfo({ profile }) {
           />
         </div>
         <div className="profile__name">{profile.fullName}</div>
-        <div className="profile__status">{profile.aboutMe}</div>
+        <div className="profile__status">
+          <ProfileStatus status={status} updateUserStatus={updateUserStatus} />
+        </div>
       </div>
     </div>
   );
