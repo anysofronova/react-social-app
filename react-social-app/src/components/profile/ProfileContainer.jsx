@@ -2,8 +2,9 @@ import React, { Component } from "react";
 import "./profile.scss";
 import Profile from "./Profile";
 import { connect } from "react-redux";
-import { getProfile, setUserProfile } from "../../redux/profileReducer";
+import { getProfile } from "../../redux/profileReducer";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { compose } from "redux";
 
 function withRouter(Component) {
   function ComponentWithRouterProp(props) {
@@ -24,12 +25,14 @@ class ProfileContainer extends Component {
     return <Profile {...this.props} />;
   }
 }
+
 const mapStateToProps = (state) => {
   return {
     profile: state.profileReducer.profile,
   };
 };
 
-export default connect(mapStateToProps, { setUserProfile, getProfile })(
-  withRouter(ProfileContainer)
-);
+export default compose(
+  connect(mapStateToProps, { getProfile }),
+  withRouter
+)(ProfileContainer);

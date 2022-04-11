@@ -10,7 +10,6 @@ const DialogsMessages = ({
 }) => {
   const onMessageChange = (e) => messageChange(e.target.value);
   const onAddMessage = () => addMessage();
-
   return (
     <div className="dialogs__messages">
       {messagesData.map((i) => (
