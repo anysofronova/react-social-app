@@ -8,8 +8,10 @@ import {
 import React, { Component } from "react";
 import Users from "./Users";
 import PreLoader from "../UI/PreLoader";
+import { withAuthRedirect } from "../../hoc/withAuthRedirect";
+import { compose } from "redux";
 
-class UsersAPIContainer extends Component {
+class UsersContainer extends Component {
   componentDidMount() {
     this.props.getUsers(this.props.currentPage, this.props.pageSize);
   }
@@ -61,11 +63,12 @@ const mapStateToProps = (state) => {
   };
 };
 
-const UsersContainer = connect(mapStateToProps, {
-  changeCurrentPage,
-  getUsers,
-  getFollow,
-  getUnFollow,
-})(UsersAPIContainer);
-
-export default UsersContainer;
+export default compose(
+  connect(mapStateToProps, {
+    changeCurrentPage,
+    getUsers,
+    getFollow,
+    getUnFollow,
+  }),
+  withAuthRedirect
+)(UsersContainer);

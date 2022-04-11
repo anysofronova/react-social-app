@@ -1,4 +1,4 @@
-import { userAPI } from "../api/api";
+import { authAPI } from "../api/api";
 
 const SET_AUTH_USER_DATA = "SET_AUTH_USER_DATA";
 const TOGGLE_IS_FETCHING = "TOGGLE_IS_FETCHING";
@@ -34,7 +34,7 @@ export const toggleIsFetching = (isFetching) => ({
 export const getAuth = () => {
   return (dispatch) => {
     dispatch(toggleIsFetching(true));
-    userAPI.auth().then((response) => {
+    authAPI.me().then((response) => {
       dispatch(toggleIsFetching(false));
       if (response.data.resultCode === 0) {
         let { id, email, login } = response.data.data;
