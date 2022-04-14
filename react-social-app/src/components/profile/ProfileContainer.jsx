@@ -9,6 +9,7 @@ import {
 } from "../../redux/profileReducer";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { compose } from "redux";
+import { withAuthRedirect } from "../../hoc/withAuthRedirect";
 
 function withRouter(Component) {
   function ComponentWithRouterProp(props) {
@@ -22,7 +23,7 @@ function withRouter(Component) {
 
 class ProfileContainer extends Component {
   componentDidMount() {
-    let userId = this.props.router.params.userId || 23291;
+    let userId = this.props.router.params.userId || this.props.id;
     this.props.getProfile(userId);
     this.props.getUserStatus(userId);
   }
@@ -35,10 +36,12 @@ const mapStateToProps = (state) => {
   return {
     profile: state.profileReducer.profile,
     status: state.profileReducer.status,
+    id: state.authReducer.id,
   };
 };
 
 export default compose(
   connect(mapStateToProps, { getProfile, getUserStatus, updateUserStatus }),
-  withRouter
+  withRouter,
+  withAuthRedirect
 )(ProfileContainer);
