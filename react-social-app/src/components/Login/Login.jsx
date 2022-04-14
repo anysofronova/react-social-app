@@ -5,15 +5,11 @@ import { connect } from "react-redux";
 import { getLogIn } from "../../redux/authReducer";
 import { Navigate } from "react-router-dom";
 
-const LoginForm = ({ getLogIn }) => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
-
-  const onSubmit = (data) => {
+const LoginForm = ({ getLogIn, loginSuccess, error }) => {
+  const { register, handleSubmit, resetField } = useForm();
+  let onSubmit = (data) => {
     getLogIn(data);
+    resetField("password");
   };
 
   return (
@@ -26,7 +22,7 @@ const LoginForm = ({ getLogIn }) => {
             required={true}
             type="email"
             autoComplete="on"
-            {...register("email", { required: true })}
+            {...register("email")}
           />
         </label>
       </div>
@@ -38,18 +34,15 @@ const LoginForm = ({ getLogIn }) => {
             type="password"
             placeholder="Password"
             autoComplete="on"
-            {...register("password", { required: true })}
+            {...register("password")}
           />
         </label>
-      </div>
-      <div className="login__form_errors">
-        <p>{errors.email?.type === "required" && "Email is required"}</p>
-        <p>{errors.password?.type === "required" && "Password is required"}</p>
       </div>
       <div className="login__form_checkbox">
         <input type="checkbox" {...register("rememberMe")} />
         remember me
       </div>
+      <div className="login__form_error">{loginSuccess ? "" : error}</div>
       <button>LOGIN</button>
       <p>Test email: free@samuraijs.com</p>
       <p>Test password: free</p>
@@ -57,13 +50,17 @@ const LoginForm = ({ getLogIn }) => {
   );
 };
 
-const Login = ({ getLogIn, isAuth }) => {
+const Login = ({ getLogIn, isAuth, loginSuccess, error }) => {
   if (isAuth) return <Navigate replace to="/" />;
   return (
     <div className="login">
       <div className="login__wrapper">
         <h1>Login</h1>
-        <LoginForm getLogIn={getLogIn} />
+        <LoginForm
+          getLogIn={getLogIn}
+          loginSuccess={loginSuccess}
+          error={error}
+        />
       </div>
     </div>
   );
@@ -72,6 +69,8 @@ const Login = ({ getLogIn, isAuth }) => {
 const mapStateToProps = (state) => {
   return {
     isAuth: state.authReducer.isAuth,
+    error: state.authReducer.error,
+    loginSuccess: state.authReducer.loginSuccess,
   };
 };
 export default connect(mapStateToProps, { getLogIn })(Login);
