@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./MyPosts.scss";
 import Post from "./Post/Post";
 
-const MyPosts = ({ getAddPost, postsData }) => {
+const MyPosts = ({ getAddPost, getDeletePost, postsData }) => {
   const onAddPost = () => {
     getAddPost(newPost);
     setNewPost("");
@@ -23,7 +23,13 @@ const MyPosts = ({ getAddPost, postsData }) => {
         </div>
         <div className="myPosts__posts">
           {postsData.map((i) => (
-            <Post message={i.post} key={i.id} likesCount={i.likesCount} />
+            <Post
+              message={i.post}
+              key={i.id}
+              id={i.id}
+              likesCount={i.likesCount}
+              getDeletePost={getDeletePost}
+            />
           ))}
         </div>
       </div>
