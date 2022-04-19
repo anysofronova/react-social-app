@@ -1,19 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 import "./MyPosts.scss";
 import Post from "./Post/Post";
 
-const MyPosts = ({ changeNewPostText, addPost, newPostText, postsData }) => {
-  const onChangeNewPostText = (e) => changeNewPostText(e.target.value);
-  const onAddPost = () => addPost();
+const MyPosts = ({ getAddPost, postsData }) => {
+  const onAddPost = () => {
+    getAddPost(newPost);
+    setNewPost("");
+  };
+  const [newPost, setNewPost] = useState("");
+  const onSetNewPost = (e) => setNewPost(e.currentTarget.value);
 
   return (
     <div className="myPosts">
       <div className="myPosts__wrapper">
         <div className="myPosts__add">
           <textarea
-            onChange={onChangeNewPostText}
+            onChange={onSetNewPost}
             className="myPosts__textarea"
-            value={newPostText}
+            value={newPost}
           />
           <button onClick={onAddPost}>Add a new post</button>
         </div>
