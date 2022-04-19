@@ -112,41 +112,27 @@ export const setUserStatus = (status) => {
   };
 };
 
-export const getAddPost = (newPostText) => {
-  return (dispatch) => {
-    dispatch(addPost(newPostText));
-  };
+export const getAddPost = (newPostText) => (dispatch) => {
+  dispatch(addPost(newPostText));
 };
-export const getDeletePost = (postId) => {
-  return (dispatch) => {
-    dispatch(deletePost(postId));
-  };
+export const getDeletePost = (postId) => (dispatch) => {
+  dispatch(deletePost(postId));
 };
-export const getLikeTogglePost = (postId) => {
-  return (dispatch) => {
-    dispatch(likeTogglePost(postId));
-  };
+export const getLikeTogglePost = (postId) => (dispatch) => {
+  dispatch(likeTogglePost(postId));
 };
-export const getProfile = (userId) => {
-  return (dispatch) => {
-    profileAPI.getProfile(userId).then((data) => {
-      dispatch(setUserProfile(data));
-    });
-  };
+
+export const getProfile = (userId) => async (dispatch) => {
+  const data = await profileAPI.getProfile(userId);
+  dispatch(setUserProfile(data));
 };
-export const getUserStatus = (userId) => {
-  return (dispatch) => {
-    profileAPI.getStatus(userId).then((data) => {
-      dispatch(setUserStatus(data));
-    });
-  };
+export const getUserStatus = (userId) => async (dispatch) => {
+  const data = await profileAPI.getStatus(userId);
+  dispatch(setUserStatus(data));
 };
-export const updateUserStatus = (status) => {
-  return (dispatch) => {
-    profileAPI.updateStatus(status).then((data) => {
-      if (data.data.resultCode === 0) dispatch(setUserStatus(status));
-    });
-  };
+export const updateUserStatus = (status) => async (dispatch) => {
+  const data = await profileAPI.updateStatus(status);
+  if (data.data.resultCode === 0) dispatch(setUserStatus(status));
 };
 
 export default profileReducer;

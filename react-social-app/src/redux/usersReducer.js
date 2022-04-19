@@ -71,34 +71,28 @@ export const toggleFollowingProgress = (isFetching, userId) => ({
   userId,
 });
 
-export const requestUsers = (currentPage, pageSize) => {
-  return (dispatch) => {
-    dispatch(toggleIsFetching(true));
-    dispatch(changeCurrentPage(currentPage));
-    userAPI.getUsers(currentPage, pageSize).then((data) => {
-      dispatch(toggleIsFetching(false));
-      dispatch(setUsers(data.items));
-      dispatch(setTotalUsersCount(data.totalCount));
-    });
-  };
+export const requestUsers = (currentPage, pageSize) => async (dispatch) => {
+  dispatch(toggleIsFetching(true));
+  dispatch(changeCurrentPage(currentPage));
+  const data = await userAPI.getUsers(currentPage, pageSize);
+  dispatch(toggleIsFetching(false));
+  dispatch(setUsers(data.items));
+  dispatch(setTotalUsersCount(data.totalCount));
 };
-export const getFollow = (userId) => {
-  return (dispatch) => {
-    dispatch(toggleFollowingProgress(true, userId));
-    userAPI.follow(userId).then((response) => {
-      if (response.data.resultCode === 0) dispatch(toggleFollow(userId));
-      dispatch(toggleFollowingProgress(false, userId));
-    });
-  };
+
+const followUnfollowFlow = async (dispatch, userId, apiMethod) => {
+  dispatch(toggleFollowingProgress(true, userId));
+  const response = await apiMethod(userId);
+  if (response.data.resultCode === 0) dispatch(toggleFollow(userId));
+  dispatch(toggleFollowingProgress(false, userId));
 };
-export const getUnFollow = (userId) => {
-  return (dispatch) => {
-    dispatch(toggleFollowingProgress(true, userId));
-    userAPI.unFollow(userId).then((response) => {
-      if (response.data.resultCode === 0) dispatch(toggleFollow(userId));
-      dispatch(toggleFollowingProgress(false, userId));
-    });
-  };
+
+export const getFollow = (userId) => (dispatch) => {
+  followUnfollowFlow(dispatch, userId, userAPI.follow.bind(userAPI));
+};
+
+export const getUnFollow = (userId) => (dispatch) => {
+  followUnfollowFlow(dispatch, userId, userAPI.unFollow.bind(userAPI));
 };
 
 export default UsersReducer;
