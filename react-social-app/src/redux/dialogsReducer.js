@@ -1,5 +1,4 @@
 const ADD_MESSAGE = "ADD_MESSAGE";
-const CHANGE_NEW_MESSAGE_TEXT = "CHANGE_NEW_MESSAGE_TEXT";
 
 let initialState = {
   dialogsData: [
@@ -36,7 +35,6 @@ let initialState = {
         "Разнообразный и богатый опыт консультация с широким активом обеспечивает широкому кругу.",
     },
   ],
-  newMessageText: "",
 };
 
 const dialogsReducer = (state = initialState, action) => {
@@ -44,27 +42,26 @@ const dialogsReducer = (state = initialState, action) => {
     case ADD_MESSAGE: {
       const newMessage = {
         id: state.messagesData.length + 1,
-        message: state.newMessageText,
+        message: action.messageText,
       };
       return {
         ...state,
         messagesData: [...state.messagesData, newMessage],
-        newMessageText: "",
       };
-    }
-    case CHANGE_NEW_MESSAGE_TEXT: {
-      return { ...state, newMessageText: action.messageText };
     }
     default:
       return state;
   }
 };
 
-export const addMessageActionCreator = () => ({ type: ADD_MESSAGE });
-export const changeNewMessageTextActionCreator = (messageText) => {
-  return {
-    type: CHANGE_NEW_MESSAGE_TEXT,
-    messageText,
+export const addMessage = (messageText) => ({
+  type: ADD_MESSAGE,
+  messageText,
+});
+
+export const getAddMessage = (messageText) => {
+  return (dispatch) => {
+    dispatch(addMessage(messageText));
   };
 };
 

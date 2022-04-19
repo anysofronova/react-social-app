@@ -1,15 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import MessageItem from "./messageItem/MessageItem";
 import "./dialogsMessages.scss";
 
-const DialogsMessages = ({
-  messageChange,
-  addMessage,
-  messagesData,
-  newMessageText,
-}) => {
-  const onMessageChange = (e) => messageChange(e.target.value);
-  const onAddMessage = () => addMessage();
+const DialogsMessages = ({ getAddMessage, messagesData }) => {
+  const onMessageChange = (e) => setMessage(e.currentTarget.value);
+  const onAddMessage = () => {
+    getAddMessage(message);
+    setMessage("");
+  };
+  const [message, setMessage] = useState("");
   return (
     <div className="dialogs__messages">
       {messagesData.map((i) => (
@@ -19,7 +18,7 @@ const DialogsMessages = ({
         <textarea
           onChange={onMessageChange}
           className="dialogs____textarea"
-          value={newMessageText}
+          value={message}
         />
 
         <button onClick={onAddMessage}>Send</button>

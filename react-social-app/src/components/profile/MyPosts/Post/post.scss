@@ -1,17 +1,21 @@
 @use "../../../../scss/" as *;
 
 .post {
-  display: flex;
+  display: grid;
+  grid-gap: 0.5rem;
+  grid-template-columns: 20fr 1fr 1fr;
   justify-content: space-between;
-  // grid-template-columns: 8fr 1fr;
-  gap: 0.5rem;
   background-color: $ligthGrey;
   padding: 1rem 1rem;
   margin-bottom: 1rem;
   border-radius: 5px;
-  justify-content: space-between;
   align-items: center;
   .post__likes {
     white-space: nowrap;
+  }
+  .post__deleteButton {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
   }
 }
