@@ -1,15 +1,16 @@
 import "./App.scss";
 import Navbar from "./components/navbar/Navbar";
 import Dialogs from "./components/dialogs/Dialogs";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, BrowserRouter as Router } from "react-router-dom";
 import UsersContainer from "./components/users/UsersContainer";
 import ProfileContainer from "./components/profile/ProfileContainer";
 import HeaderContainer from "./components/header/HeaderContainer";
 import Login from "./components/Login/Login";
-import { Component } from "react";
-import { connect } from "react-redux";
+import React, { Component } from "react";
+import { connect, Provider } from "react-redux";
 import { initializeApp } from "./redux/authReducer";
 import PreLoader from "./components/UI/PreLoader";
+import store from "./redux/reduxStore";
 
 class App extends Component {
   componentDidMount() {
@@ -57,4 +58,16 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { initializeApp })(App);
+const AppContainer = connect(mapStateToProps, { initializeApp })(App);
+
+const AppMain = () => {
+  return (
+    <Router>
+      <Provider store={store}>
+        <AppContainer store={store} />
+      </Provider>
+    </Router>
+  );
+};
+
+export default AppMain;
