@@ -4,22 +4,19 @@
   overflow-y: scroll;
   .dialogs__messages_add {
     padding: 1rem 2rem;
-    display: flex;
+    display: grid;
+    grid-template-columns: 5fr 1fr;
     .dialogs____textarea {
-      width: 90%;
       resize: none;
-      height: 7vh;
       padding: 1rem;
-      margin-bottom: 1rem;
     }
     button {
       padding: 0 1rem;
       background-color: $white;
       border: 1px solid $dark;
-      width: 10%;
       cursor: pointer;
-      height: 7vh;
       text-align: center;
+      font-size: 1.4vw;
       &:hover {
         background-color: $medium;
         color: $white;
