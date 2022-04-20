@@ -1,29 +1,18 @@
 import React from "react";
 import "./paginator.scss";
+import Pagination from "@mui/material/Pagination";
 
-const Paginator = ({
-  onchangeCurrentPage,
-  currentPage,
-  totalUsersCount,
-  pageSize,
-}) => {
-  let pagesCount = Math.ceil(totalUsersCount / pageSize);
-  let pages = [];
-  for (let i = 1; i <= pagesCount; i++) {
-    pages.push(i);
-    if (i === 20) break;
-  }
+const Paginator = ({ onchangeCurrentPage, totalUsersCount, pageSize }) => {
+  const pagesCount = Math.ceil(totalUsersCount / pageSize);
+  const pages = [];
+  for (let i = 1; i <= pagesCount; i++) pages.push(i);
+
   return (
     <div className="paginator_buttons">
-      {pages.map((i) => (
-        <button
-          onClick={() => onchangeCurrentPage(i)}
-          key={i}
-          className={currentPage === i ? "selectedPage" : ""}
-        >
-          {i}
-        </button>
-      ))}
+      <Pagination
+        count={pages.length}
+        onChange={(_, num) => onchangeCurrentPage(num)}
+      />
     </div>
   );
 };
