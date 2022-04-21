@@ -4,8 +4,19 @@ import defaultUserPhoto from "../../../assets/img/defaultUserPhoto.png";
 import PreLoader from "../../UI/PreLoader";
 import ProfileStatus from "./ProfileStatus";
 
-function ProfileInfo({ profile, status, updateUserStatus }) {
+function ProfileInfo({
+  profile,
+  status,
+  updateUserStatus,
+  isOwner,
+  savePhoto,
+}) {
   if (!profile) return <PreLoader />;
+  const onMainPhotoSelected = (e) => {
+    if (e.target.files.length) {
+      savePhoto(e.target.files[0]);
+    }
+  };
   return (
     <div className="profileInfo">
       <div className="profile__bgimg"></div>
@@ -17,6 +28,7 @@ function ProfileInfo({ profile, status, updateUserStatus }) {
             }
             alt="profile"
           />
+          {isOwner && <input type={"file"} onChange={onMainPhotoSelected} />}
         </div>
         <div className="profile__name">{profile.fullName}</div>
         <div className="profile__status">

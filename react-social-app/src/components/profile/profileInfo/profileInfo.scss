@@ -9,9 +9,9 @@
     background-position: 0px -28vw;
   }
   .profile__desc {
-    padding: 2rem;
+    padding: 2rem 4rem;
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 2fr;
     grid-template-rows: 10vh 10vh;
     grid-gap: 2rem;
     align-items: center;
@@ -21,10 +21,13 @@
       "img status ";
     .profile__img {
       grid-area: img;
-      display: flex;
-      justify-content: center;
+      display: grid;
+      grid-gap: 0.2rem;
+      grid-template-columns: 1fr;
+      grid-template-rows: 22vh 5vh;
+      align-items: center;
       img {
-        max-height: 24vh;
+        max-height: 20vh;
         border-radius: 10px;
       }
     }
