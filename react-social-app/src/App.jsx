@@ -1,6 +1,6 @@
 import "./App.scss";
 import Navbar from "./components/navbar/Navbar";
-import { Routes, Route, BrowserRouter as Router } from "react-router-dom";
+import { Routes, Route, HashRouter as Router } from "react-router-dom";
 import HeaderContainer from "./components/header/HeaderContainer";
 import React, { Component, Suspense, lazy } from "react";
 import { connect, Provider } from "react-redux";
@@ -67,11 +67,13 @@ const AppContainer = connect(mapStateToProps, { initializeApp })(App);
 
 const AppMain = () => {
   return (
-    <Router>
-      <Provider store={store}>
-        <AppContainer store={store} />
-      </Provider>
-    </Router>
+    <>
+      <Router>
+        <Provider store={store}>
+          <AppContainer store={store} />
+        </Provider>
+      </Router>
+    </>
   );
 };
 
