@@ -7,6 +7,7 @@ import { connect, Provider } from "react-redux";
 import { initializeApp } from "./redux/authReducer";
 import PreLoader from "./components/UI/PreLoader";
 import store from "./redux/reduxStore";
+import NotFound from "./components/notFound/NotFound";
 
 const ProfileContainer = lazy(() =>
   import("./components/profile/ProfileContainer")
@@ -20,8 +21,7 @@ class App extends Component {
     this.props.initializeApp();
   }
   render() {
-    let { store, initializedSuccess } = this.props;
-    if (!initializedSuccess) return <PreLoader />;
+    let { store } = this.props;
     return (
       <div className="main">
         <div className="main__wrapper">
@@ -49,6 +49,7 @@ class App extends Component {
                 />
                 <Route path="/login" element={<Login />} />
                 <Route path="/" element={<ProfileContainer />} />
+                <Route path="*" element={<NotFound />} />
               </Routes>
             </Suspense>
           </div>
