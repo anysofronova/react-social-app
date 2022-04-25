@@ -1,0 +1,35 @@
+@use "../../../scss/" as *;
+.profileForm {
+  label {
+    display: grid;
+    justify-content: space-between;
+    grid-template-columns: 2fr 3fr;
+    margin-top: 1rem;
+  }
+  .profileForm__buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin-top: 1rem;
+    grid-template-areas: "cancel save ";
+    .btn__save {
+      grid-area: save;
+    }
+    .btn__cancel {
+      grid-area: cancel;
+    }
+
+    button {
+      width: 100%;
+      padding: 0.4rem 1rem;
+      cursor: pointer;
+      background-color: $white;
+      border: 1px solid $dark;
+      height: 4vh;
+      &:hover {
+        background-color: $medium;
+        color: $white;
+        transition: all 0.15s ease-in;
+      }
+    }
+  }
+}
