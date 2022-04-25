@@ -1,0 +1,32 @@
+@use "../../../scss/" as *;
+.profile__info {
+  grid-area: info;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  .profile__key {
+    font-weight: 500;
+  }
+  .profile__name {
+    font-weight: 600;
+    font-size: 2.8vw;
+    display: flex;
+  }
+  .profile__status {
+    margin-bottom: 1rem;
+    font-style: italic;
+  }
+  .editMode_button {
+    padding: 0.5rem 1rem;
+    background-color: $white;
+    border: 1px solid $dark;
+    cursor: pointer;
+    border-radius: 3px;
+    &:hover {
+      background-color: $medium;
+      color: $white;
+      transition: all 0.15s ease-in;
+    }
+  }
+}

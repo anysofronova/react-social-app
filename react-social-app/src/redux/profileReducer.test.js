@@ -1,4 +1,8 @@
-import profileReducer, { addPost, deletePost } from "./profileReducer";
+import profileReducer, {
+  addPost,
+  deletePost,
+  likeTogglePost,
+} from "./profileReducer";
 
 let state = {
   postsData: [
@@ -43,4 +47,11 @@ test("deleting post", () => {
 
   let newState = profileReducer(state, action);
   expect(newState.postsData.length).toBe(4);
+});
+
+test("liking post", () => {
+  let action = likeTogglePost(1);
+
+  let newState = profileReducer(state, action);
+  expect(newState.postsData[0].likesCount).toBe(1024);
 });

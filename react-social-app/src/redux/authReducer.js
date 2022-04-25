@@ -55,40 +55,35 @@ export const initializedSuccess = () => ({
   type: INITIALIZED_SUCCESS,
 });
 
-export const getAuth = () => {
-  return (dispatch) => {
-    dispatch(toggleIsFetching(true));
-    return authAPI.me().then((response) => {
-      dispatch(toggleIsFetching(false));
-      if (response.data.resultCode === 0) {
-        let { id, email, login } = response.data.data;
-        dispatch(setAuthUserData(id, email, login, true));
-      }
-    });
-  };
+export const getAuth = () => async (dispatch) => {
+  dispatch(toggleIsFetching(true));
+  const response = await authAPI.me();
+  dispatch(toggleIsFetching(false));
+  if (response.data.resultCode === 0) {
+    const { id, email, login } = response.data.data;
+    dispatch(setAuthUserData(id, email, login, true));
+  }
 };
-export const getLogIn = ({ email, password, rememberMe }) => {
-  return (dispatch) => {
-    authAPI.logIn(email, password, rememberMe).then((response) => {
-      if (response.data.resultCode === 0) {
-        dispatch(setAuthError(true));
-        dispatch(getAuth());
-      } else {
-        dispatch(setAuthError(false, response.data.messages[0]));
-      }
-    });
+
+export const getLogIn =
+  ({ email, password, rememberMe }) =>
+  async (dispatch) => {
+    const response = await authAPI.logIn(email, password, rememberMe);
+    if (response.data.resultCode === 0) {
+      dispatch(setAuthError(true));
+      dispatch(getAuth());
+    } else {
+      dispatch(setAuthError(false, response.data.messages[0]));
+    }
   };
-};
-export const getLogOut = () => {
-  return (dispatch) => {
-    dispatch(toggleIsFetching(true));
-    authAPI.logOut().then((response) => {
-      dispatch(toggleIsFetching(false));
-      if (response.data.resultCode === 0) {
-        dispatch(setAuthUserData(null, null, null, false));
-      }
-    });
-  };
+
+export const getLogOut = () => async (dispatch) => {
+  dispatch(toggleIsFetching(true));
+  const response = await authAPI.logOut();
+  dispatch(toggleIsFetching(false));
+  if (response.data.resultCode === 0) {
+    dispatch(setAuthUserData(null, null, null, false));
+  }
 };
 export const initializeApp = () => (dispatch) => {
   const promise = dispatch(getAuth());

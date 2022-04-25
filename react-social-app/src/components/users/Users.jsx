@@ -1,6 +1,7 @@
 import React from "react";
 import "./users.scss";
 import UserItem from "./userItem/UserItem";
+import Paginator from "../UI/paginator/Paginator";
 
 const Users = ({
   users,
@@ -12,12 +13,6 @@ const Users = ({
   getFollow,
   getUnFollow,
 }) => {
-  let pagesCount = Math.ceil(totalUsersCount / pageSize);
-  let pages = [];
-  for (let i = 1; i <= pagesCount; i++) {
-    pages.push(i);
-    if (i === 20) break;
-  }
   return (
     <div className="users">
       <div className="users__wrapper">
@@ -34,17 +29,12 @@ const Users = ({
             getUnFollow={getUnFollow}
           />
         ))}
-        <div className="users_buttons">
-          {pages.map((i) => (
-            <button
-              onClick={() => onchangeCurrentPage(i)}
-              key={i}
-              className={currentPage === i ? "selectedPage" : ""}
-            >
-              {i}
-            </button>
-          ))}
-        </div>
+        <Paginator
+          onchangeCurrentPage={onchangeCurrentPage}
+          currentPage={currentPage}
+          totalUsersCount={totalUsersCount}
+          pageSize={pageSize}
+        />
       </div>
     </div>
   );

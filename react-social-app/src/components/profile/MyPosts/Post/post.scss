@@ -10,12 +10,15 @@
   margin-bottom: 1rem;
   border-radius: 5px;
   align-items: center;
-  .post__likes {
-    white-space: nowrap;
-  }
-  .post__deleteButton {
+  button {
     border: none;
     background-color: transparent;
+    cursor: pointer;
+  }
+  .post__likes {
+    white-space: nowrap;
+    display: flex;
+    gap: 0.2rem;
     cursor: pointer;
   }
 }

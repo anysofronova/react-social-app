@@ -2,39 +2,33 @@
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  .profile__bgimg {
+  font-size: 0.9rem;
+  .profile__bgImg {
     background-image: url("https://cdn.pixabay.com/photo/2017/08/10/00/07/nature-2616302_1280.jpg");
     height: 100px;
     background-size: cover;
     background-position: 0px -28vw;
   }
   .profile__desc {
-    padding: 2rem;
+    padding: 2rem 4rem;
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 10vh 10vh;
+    grid-template-columns: 1fr 2fr;
     grid-gap: 2rem;
-    align-items: center;
     justify-content: center;
     grid-template-areas:
-      "img name "
-      "img status ";
+      "img info "
+      "img info ";
     .profile__img {
       grid-area: img;
-      display: flex;
-      justify-content: center;
+      display: grid;
+      grid-gap: 0.2rem;
+      grid-template-columns: 1fr;
+      grid-template-rows: 22vh 5vh;
+      align-items: center;
       img {
-        max-height: 24vh;
+        max-height: 20vh;
         border-radius: 10px;
       }
-    }
-    .profile__name {
-      grid-area: name;
-      font-weight: 600;
-      display: flex;
-    }
-    .profile__status {
-      grid-area: status;
     }
   }
 }
