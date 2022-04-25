@@ -51,4 +51,7 @@ export const profileAPI = {
       headers: { "Content-Type": "multipart/form-data" },
     });
   },
+  editProfile(data) {
+    return instance.put(`profile`, data);
+  },
 };

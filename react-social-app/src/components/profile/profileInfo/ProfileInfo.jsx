@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import "./profileInfo.scss";
 import defaultUserPhoto from "../../../assets/img/defaultUserPhoto.png";
 import PreLoader from "../../UI/PreLoader";
-import ProfileStatus from "./ProfileStatus";
+import ProfileData from "./ProfileData";
+import ProfileForm from "./ProfileForm";
 
 function ProfileInfo({
   profile,
@@ -10,7 +11,9 @@ function ProfileInfo({
   updateUserStatus,
   isOwner,
   savePhoto,
+  editProfile,
 }) {
+  const [editMode, setEditMode] = useState(false);
   if (!profile) return <PreLoader />;
   const onMainPhotoSelected = (e) => {
     if (e.target.files.length) {
@@ -19,7 +22,7 @@ function ProfileInfo({
   };
   return (
     <div className="profileInfo">
-      <div className="profile__bgimg"></div>
+      <div className="profile__bgImg">&#160;</div>
       <div className="profile__desc">
         <div className="profile__img">
           <img
@@ -30,10 +33,23 @@ function ProfileInfo({
           />
           {isOwner && <input type={"file"} onChange={onMainPhotoSelected} />}
         </div>
-        <div className="profile__name">{profile.fullName}</div>
-        <div className="profile__status">
-          <ProfileStatus status={status} updateUserStatus={updateUserStatus} />
-        </div>
+        {editMode ? (
+          <ProfileForm
+            profile={profile}
+            editProfile={editProfile}
+            setEditMode={setEditMode}
+          />
+        ) : (
+          <ProfileData
+            profile={profile}
+            status={status}
+            updateUserStatus={updateUserStatus}
+            isOwner={isOwner}
+            goToEditMode={() => {
+              setEditMode(true);
+            }}
+          />
+        )}
       </div>
     </div>
   );
