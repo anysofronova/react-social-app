@@ -6,6 +6,7 @@ const LIKE_TOGGLE_POST = "LIKE_POST";
 const SET_USER_PROFILE = "SET_USER_PROFILE";
 const SET_USER_STATUS = "SET_USER_STATUS";
 const SAVE_PHOTO_SUCCESS = "SAVE_PHOTO_SUCCESS";
+const SET_ERROR = "SET_ERROR";
 
 let initialState = {
   postsData: [
@@ -42,6 +43,8 @@ let initialState = {
   ],
   profile: null,
   status: "",
+  error: null,
+  editSuccess: true,
 };
 
 const profileReducer = (state = initialState, action) => {
@@ -79,6 +82,8 @@ const profileReducer = (state = initialState, action) => {
       return { ...state, status: action.status };
     case SAVE_PHOTO_SUCCESS:
       return { ...state, profile: { ...state.profile }, photos: action.file };
+    case SET_ERROR:
+      return { ...state, editSuccess: action.editSuccess, error: action.error };
     default:
       return state;
   }
@@ -120,6 +125,13 @@ export const savePhotoSuccess = (file) => {
     file,
   };
 };
+export const setError = (editSuccess, error) => {
+  return {
+    type: SET_ERROR,
+    editSuccess,
+    error,
+  };
+};
 
 export const getAddPost = (newPostText) => (dispatch) => {
   dispatch(addPost(newPostText));
@@ -150,7 +162,12 @@ export const savePhoto = (file) => async (dispatch) => {
 export const editProfile = (info) => async (dispatch, getState) => {
   const userId = getState().authReducer.id;
   const data = await profileAPI.editProfile(info);
-  if (data.data.resultCode === 0) dispatch(getProfile(userId));
+  if (data.data.resultCode === 0) {
+    dispatch(getProfile(userId));
+    dispatch(setError(true, null));
+  } else {
+    dispatch(setError(false, data.data.messages[0]));
+  }
 };
 
 export default profileReducer;

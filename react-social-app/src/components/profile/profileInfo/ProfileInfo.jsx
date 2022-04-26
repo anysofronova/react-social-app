@@ -12,6 +12,8 @@ function ProfileInfo({
   isOwner,
   savePhoto,
   editProfile,
+  error,
+  editSuccess,
 }) {
   const [editMode, setEditMode] = useState(false);
   if (!profile) return <PreLoader />;
@@ -38,6 +40,8 @@ function ProfileInfo({
             profile={profile}
             editProfile={editProfile}
             setEditMode={setEditMode}
+            error={error}
+            editSuccess={editSuccess}
           />
         ) : (
           <ProfileData

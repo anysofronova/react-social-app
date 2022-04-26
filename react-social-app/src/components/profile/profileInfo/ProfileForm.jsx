@@ -2,7 +2,13 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import "./ProfileForm.scss";
 
-const ProfileForm = ({ editProfile, setEditMode, profile }) => {
+const ProfileForm = ({
+  editProfile,
+  setEditMode,
+  profile,
+  error,
+  editSuccess,
+}) => {
   const { register, handleSubmit } = useForm();
   const { fullName, aboutMe, lookingForAJobDescription, contacts } = profile;
   const [fullNameInp, setFullNameInp] = useState(fullName);
@@ -14,8 +20,9 @@ const ProfileForm = ({ editProfile, setEditMode, profile }) => {
   const [website, setWebsite] = useState(contacts.website);
   const [youtube, setYoutube] = useState(contacts.youtube);
   const [mainLink, setMainLink] = useState(contacts.mainLink);
-  const onSubmit = (data) => {
-    editProfile(data);
+  const onSubmit = async (data) => {
+    await editProfile(data);
+    if (editSuccess) return;
     setEditMode(false);
   };
   const onCancel = () => {
@@ -23,6 +30,7 @@ const ProfileForm = ({ editProfile, setEditMode, profile }) => {
   };
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="profileForm">
+      <p style={{ color: "red" }}>Error: {editSuccess ? "" : error}</p>
       <div className="fullName">
         <label>
           FullName:
