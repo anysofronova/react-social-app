@@ -1,9 +1,10 @@
-import { authAPI } from "../api/api";
+import { authAPI, securityAPI } from "../api/api";
 
 const SET_AUTH_USER_DATA = "SET_AUTH_USER_DATA";
 const TOGGLE_IS_FETCHING = "TOGGLE_IS_FETCHING";
 const AUTH_ERROR = "AUTH_ERROR";
 const INITIALIZED_SUCCESS = "INITIALIZE_SUCCESS";
+const GET_CAPTCHA = "GET_CAPTCHA";
 
 const initialState = {
   id: null,
@@ -14,6 +15,7 @@ const initialState = {
   loginSuccess: true,
   error: "",
   initializedSuccess: false,
+  captcha: null,
 };
 
 const authReducer = (state = initialState, action) => {
@@ -33,14 +35,16 @@ const authReducer = (state = initialState, action) => {
         ...state,
         initializedSuccess: true,
       };
+    case GET_CAPTCHA:
+      return { ...state, captcha: action.url };
     default:
       return state;
   }
 };
 
-export const setAuthUserData = (id, email, login, isAuth) => ({
+export const setAuthUserData = (id, email, login, isAuth, captcha) => ({
   type: SET_AUTH_USER_DATA,
-  data: { id, email, login, isAuth },
+  data: { id, email, login, isAuth, captcha },
 });
 export const toggleIsFetching = (isFetching) => ({
   type: TOGGLE_IS_FETCHING,
@@ -54,25 +58,32 @@ export const setAuthError = (loginSuccess, error) => ({
 export const initializedSuccess = () => ({
   type: INITIALIZED_SUCCESS,
 });
+export const setCaptcha = (url) => ({
+  type: GET_CAPTCHA,
+  url,
+});
 
 export const getAuth = () => async (dispatch) => {
   dispatch(toggleIsFetching(true));
   const response = await authAPI.me();
   dispatch(toggleIsFetching(false));
   if (response.data.resultCode === 0) {
-    const { id, email, login } = response.data.data;
-    dispatch(setAuthUserData(id, email, login, true));
+    const { id, email, login, captcha } = response.data.data;
+    dispatch(setAuthUserData(id, email, login, true, captcha));
   }
 };
 
 export const getLogIn =
-  ({ email, password, rememberMe }) =>
+  ({ email, password, rememberMe, captcha }) =>
   async (dispatch) => {
-    const response = await authAPI.logIn(email, password, rememberMe);
+    const response = await authAPI.logIn(email, password, rememberMe, captcha);
     if (response.data.resultCode === 0) {
       dispatch(setAuthError(true));
       dispatch(getAuth());
     } else {
+      if (response.data.resultCode === 10) {
+        dispatch(getCaptcha());
+      }
       dispatch(setAuthError(false, response.data.messages[0]));
     }
   };
@@ -82,7 +93,7 @@ export const getLogOut = () => async (dispatch) => {
   const response = await authAPI.logOut();
   dispatch(toggleIsFetching(false));
   if (response.data.resultCode === 0) {
-    dispatch(setAuthUserData(null, null, null, false));
+    dispatch(setAuthUserData(null, null, null, false, null));
   }
 };
 export const initializeApp = () => (dispatch) => {
@@ -90,6 +101,11 @@ export const initializeApp = () => (dispatch) => {
   promise.then(() => {
     dispatch(initializedSuccess());
   });
+};
+export const getCaptcha = () => async (dispatch) => {
+  const response = await securityAPI.captcha();
+  const captcha = response.data.url;
+  dispatch(setCaptcha(captcha));
 };
 
 export default authReducer;
