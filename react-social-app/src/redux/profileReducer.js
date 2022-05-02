@@ -12,31 +12,31 @@ let initialState = {
   postsData: [
     {
       id: 5,
-      post: "С другой стороны укрепление и развитие структуры обеспечивает участие в формировании систем массового участия.",
+      post: "My mission in life is not merely to survive but thrive.",
       likesCount: 1023,
       isLiked: false,
     },
     {
       id: 4,
-      post: "Если у вас есть какие то интересные предложения, обращайтесь! Студия Web-Boss всегда готова решить любую задачу.",
+      post: "Everything has beauty but not everyone can see.",
       likesCount: 319,
       isLiked: false,
     },
     {
       id: 3,
-      post: "Повседневная практика показывает, что реализация намеченных плановых заданий в значительной степени обуславливает создание модели развития.",
+      post: "Happiness often sneaks in through a door you didn’t know you left open.",
       likesCount: 238,
       isLiked: false,
     },
     {
       id: 2,
-      post: "С другой стороны рамки и место обучения кадров способствует подготовки и реализации модели развития.",
+      post: "Sometimes you will never know the value of a moment until it becomes a memory.",
       likesCount: 194,
       isLiked: false,
     },
     {
       id: 1,
-      post: "Товарищи! постоянное информационно-пропагандистское обеспечение нашей деятельности позволяет выполнять важные задания по разработке модели развития.",
+      post: "We have nothing to fear but fear itself.",
       likesCount: 739,
       isLiked: false,
     },
