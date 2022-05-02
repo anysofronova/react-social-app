@@ -43,8 +43,8 @@ let initialState = {
   ],
   profile: null,
   status: "",
-  error: null,
   editSuccess: true,
+  error: "",
 };
 
 const profileReducer = (state = initialState, action) => {
@@ -163,10 +163,11 @@ export const editProfile = (info) => async (dispatch, getState) => {
   const userId = getState().authReducer.id;
   const data = await profileAPI.editProfile(info);
   if (data.data.resultCode === 0) {
-    dispatch(getProfile(userId));
-    dispatch(setError(true, null));
+    await dispatch(getProfile(userId));
+    await dispatch(setError(true, ""));
   } else {
-    dispatch(setError(false, data.data.messages[0]));
+    await dispatch(setError(false, data.data.messages[0]));
+    return 16;
   }
 };
 

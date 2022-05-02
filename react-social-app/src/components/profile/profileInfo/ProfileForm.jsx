@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useForm } from "react-hook-form";
 import "./ProfileForm.scss";
 
@@ -9,20 +9,23 @@ const ProfileForm = ({
   error,
   editSuccess,
 }) => {
-  const { register, handleSubmit } = useForm();
-  const { fullName, aboutMe, lookingForAJobDescription, contacts } = profile;
-  const [fullNameInp, setFullNameInp] = useState(fullName);
-  const [aboutMeInp, setAboutMeInp] = useState(aboutMe);
-  const [lookingForAJobDescriptionInp, setLookingForAJobDescriptionInp] =
-    useState(lookingForAJobDescription);
-  const [github, setGithub] = useState(contacts.github);
-  const [vk, setVk] = useState(contacts.vk);
-  const [website, setWebsite] = useState(contacts.website);
-  const [youtube, setYoutube] = useState(contacts.youtube);
-  const [mainLink, setMainLink] = useState(contacts.mainLink);
+  const { github, vk, website, youtube, mainLink } = profile.contacts;
+  const { register, handleSubmit } = useForm({
+    defaultValues: {
+      fullName: profile.fullName,
+      aboutMe: profile.aboutMe,
+      lookingForAJob: profile.lookingForAJob,
+      lookingForAJobDescription: profile.lookingForAJobDescription,
+      "contacts.github": github,
+      "contacts.vk": vk,
+      "contacts.website": website,
+      "contacts.youtube": youtube,
+      "contacts.mainLink": mainLink,
+    },
+  });
   const onSubmit = async (data) => {
-    await editProfile(data);
-    if (editSuccess) return;
+    const res = await editProfile(data);
+    if (res === 16) return;
     setEditMode(false);
   };
   const onCancel = () => {
@@ -30,16 +33,15 @@ const ProfileForm = ({
   };
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="profileForm">
-      <p style={{ color: "red" }}>Error: {editSuccess ? "" : error}</p>
+      {!editSuccess ? <p style={{ color: "red" }}>Error: {error}</p> : null}
       <div className="fullName">
         <label>
           FullName:
           <input
+            name="fullName"
             required={true}
             type="text"
             {...register("fullName")}
-            value={fullNameInp}
-            onChange={(e) => setFullNameInp(e.currentTarget.value)}
           />
         </label>
       </div>
@@ -47,13 +49,10 @@ const ProfileForm = ({
         <label>
           Professional Description:
           <input
+            name="lookingForAJobDescription"
             required={true}
             type="text"
             {...register("lookingForAJobDescription")}
-            value={lookingForAJobDescriptionInp}
-            onChange={(e) =>
-              setLookingForAJobDescriptionInp(e.currentTarget.value)
-            }
           />
         </label>
       </div>
@@ -61,64 +60,58 @@ const ProfileForm = ({
         <label>
           About Me:
           <input
+            name="aboutMe"
             required={true}
             type="text"
             {...register("aboutMe")}
-            value={aboutMeInp}
-            onChange={(e) => setAboutMeInp(e.currentTarget.value)}
           />
         </label>
       </div>
       <div className="lookingForAJob">
         <label>
           Looking for a job:
-          <input type="checkbox" {...register("lookingForAJob")} />
+          <input
+            name="lookingForAJob"
+            type="checkbox"
+            {...register("lookingForAJob")}
+          />
         </label>
       </div>
       <div className="contact">
         <label>
           Github:
           <input
+            name="contacts.github"
             type="text"
             {...register("contacts.github")}
-            value={github}
-            onChange={(e) => setGithub(e.currentTarget.value)}
           />
         </label>
         <label>
           Vk:
-          <input
-            type="text"
-            {...register("contacts.vk")}
-            value={vk}
-            onChange={(e) => setVk(e.currentTarget.value)}
-          />
+          <input name="contacts.vk" type="text" {...register("contacts.vk")} />
         </label>
         <label>
           Website:
           <input
+            name="contacts.website"
             type="text"
             {...register("contacts.website")}
-            value={website}
-            onChange={(e) => setWebsite(e.currentTarget.value)}
           />
         </label>
         <label>
           Youtube:
           <input
+            name="contacts.youtube"
             type="text"
             {...register("contacts.youtube")}
-            value={youtube}
-            onChange={(e) => setYoutube(e.currentTarget.value)}
           />
         </label>
         <label>
           Main Link:
           <input
+            name="contacts.mainLink"
             type="text"
             {...register("contacts.mainLink")}
-            value={mainLink}
-            onChange={(e) => setMainLink(e.currentTarget.value)}
           />
         </label>
       </div>
