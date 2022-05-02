@@ -21,7 +21,11 @@ const ProfileData = ({
     <div className="profile__info">
       <div className="profile__name">{fullName}</div>
       <div className="profile__status">
-        <ProfileStatus status={status} updateUserStatus={updateUserStatus} />
+        <ProfileStatus
+          status={status}
+          updateUserStatus={updateUserStatus}
+          isOwner={isOwner}
+        />
       </div>
       <div className="profile__aboutMe">
         <span className="profile__key">About {fullName}:&#160;</span>

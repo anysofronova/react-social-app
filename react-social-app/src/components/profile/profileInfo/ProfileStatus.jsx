@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-const ProfileStatus = ({ updateUserStatus, status }) => {
+const ProfileStatus = ({ updateUserStatus, status, isOwner }) => {
   let [editMode, setEditMode] = useState(false);
   let [newStatus, setNewStatus] = useState(status);
 
@@ -9,6 +9,7 @@ const ProfileStatus = ({ updateUserStatus, status }) => {
   }, [status]);
 
   const toggleEditMode = () => {
+    if (!isOwner) return;
     if (editMode) updateUserStatus(newStatus);
     setEditMode(!editMode);
   };
@@ -33,6 +34,11 @@ const ProfileStatus = ({ updateUserStatus, status }) => {
           {status || "The user has hidden the information"}
         </div>
       )}
+      {isOwner ? (
+        <p style={{ fontSize: "10px", color: "grey" }}>
+          DoubleClick to change status
+        </p>
+      ) : null}
     </div>
   );
 };

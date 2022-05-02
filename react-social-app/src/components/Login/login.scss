@@ -27,14 +27,21 @@
           margin-right: 1rem;
         }
       }
+      .login__form_captcha {
+        input {
+          padding: 0;
+        }
+        img {
+          max-width: 50%;
+          margin-bottom: 0.5rem;
+        }
+      }
       input {
         padding: 0.4rem 1rem;
         font-size: 16px;
       }
-      .login__form_errors {
-        min-height: 20px;
-        display: flex;
-        flex-direction: column;
+      .login__form_error {
+        color: red;
       }
     }
     button {

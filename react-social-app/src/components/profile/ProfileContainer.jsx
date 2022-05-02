@@ -46,6 +46,8 @@ const mapStateToProps = (state) => {
     profile: state.profileReducer.profile,
     status: state.profileReducer.status,
     id: state.authReducer.id,
+    error: state.profileReducer.error,
+    editSuccess: state.profileReducer.editSuccess,
   };
 };
 

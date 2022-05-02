@@ -10,6 +10,8 @@ function Profile({
   isOwner,
   savePhoto,
   editProfile,
+  error,
+  editSuccess,
 }) {
   return (
     <div className="profile">
@@ -21,6 +23,8 @@ function Profile({
           isOwner={isOwner}
           savePhoto={savePhoto}
           editProfile={editProfile}
+          error={error}
+          editSuccess={editSuccess}
         />
         <MyPostsContainer />
       </div>
