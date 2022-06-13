@@ -1,4 +1,4 @@
-<h2>Social Network app in React.</h2>
+<h2>Social Network App made using React framework.</h2>
 
 <div>
 <img src="https://img.shields.io/badge/react-%23323330.svg?style=for-the-badge&logo=react&logoColor=white">
